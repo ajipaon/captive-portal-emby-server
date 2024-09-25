@@ -11,7 +11,7 @@ const RegisterPage: React.FC = () => {
 
   const handleLink = () => {
     // Deteksi perangkat pengguna
-    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
+    const userAgent = navigator.userAgent || (window as unknown as { opera?: string }).opera || '';
 
     const deepLink = 'emby://'; // Deep link untuk membuka aplikasi Emby
 
@@ -33,7 +33,7 @@ const RegisterPage: React.FC = () => {
       // }, 3000); // 3 detik
     } else {
       console.log("browser")
-      
+
       router.push('http://localhost:8096');
     }
   }
