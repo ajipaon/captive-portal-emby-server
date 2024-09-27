@@ -58,7 +58,7 @@ COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 USER nextjs
 
 EXPOSE 3000
-ENV NEXT_API_EMBY http://localhost:8096
+ENV NEXT_API_EMBY http://emby:8096
 ENV NEXT_PUBLIC_API_EMBY http://192.168.0.160:8096
 ENV NEXT_TOKEN_EMBY 08e470d0535045818292772381e2e029
 ENV NEXT_USER_TEMPLATE_FREE_EMBY 0e3134ba0e5b40948452be5fc95f78cb
