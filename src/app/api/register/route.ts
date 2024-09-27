@@ -1,3 +1,4 @@
+import Error from 'next/error';
 import { NextRequest, NextResponse } from 'next/server';
 
 export async function POST(req: NextRequest) {
@@ -52,8 +53,15 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Failed to register user' }, { status: response.status });
     }
         return NextResponse.json({ message: 'User registered successfully' }, { status: 200 });
-    } catch {
-        // Tangani kesalahan parsing JSON atau lainnya
+        
+    } catch(err: unknown) {
+        if (err instanceof Error) {
+            console.error((err as Error)?.message);
+        } else {
+            console.error('An unknown error occurred');
+        }
+        
+        console.error(err);
         return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }
 }
