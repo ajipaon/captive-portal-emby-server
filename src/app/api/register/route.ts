@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
         }),
     });
 
-    console.log(response)
+    console.log(response);
     const result = await response.json();
     if(result.Id) {
          await fetch(`${next_api_emby}/emby/Users/${result.Id}/Password?api_key=${api_key}` , {
