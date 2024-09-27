@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-
+const fetch = require('undici').fetch;
 export async function POST(req: NextRequest) {
     try {
         const { username, password } = await req.json();
@@ -13,7 +13,6 @@ export async function POST(req: NextRequest) {
         const next_api_emby = process.env.NEXT_API_EMBY as string || 'http://localhost:8920';
         const user_template = process.env.NEXT_USER_TEMPLATE_FREE_EMBY as string;
 
-        console.log(next_api_emby)
     const response = await fetch(`${next_api_emby}/emby/Users/New?api_key=${api_key}`, {
         method: 'POST',
         headers: {
@@ -30,8 +29,8 @@ export async function POST(req: NextRequest) {
         }),
     });
 
-    console.log(response);
     const result = await response.json();
+    console.log(result)
     if(result.Id) {
          await fetch(`${next_api_emby}/emby/Users/${result.Id}/Password?api_key=${api_key}` , {
             method: 'POST',
