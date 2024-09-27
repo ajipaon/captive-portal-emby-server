@@ -10,10 +10,10 @@ export async function POST(req: NextRequest) {
         }
 
         const api_key = process.env.NEXT_TOKEN_EMBY as string || '08e470d0535045818292772381e2e029';
+        const next_api_emby = process.env.NEXT_API_EMBY as string || 'http://localhost:8920';
         const user_template = process.env.NEXT_USER_TEMPLATE_FREE_EMBY as string;
-        console.log(user_template);
 
-    const response = await fetch(`http://localhost:8096/emby/Users/New?api_key=${api_key}`, {
+    const response = await fetch(`${next_api_emby}/emby/Users/New?api_key=${api_key}`, {
         method: 'POST',
         headers: {
             'accept': 'application/json',
@@ -29,9 +29,10 @@ export async function POST(req: NextRequest) {
         }),
     });
 
+    console.log(response)
     const result = await response.json();
     if(result.Id) {
-         await fetch(`http://localhost:8096/emby/Users/${result.Id}/Password?api_key=${api_key}` , {
+         await fetch(`${next_api_emby}/emby/Users/${result.Id}/Password?api_key=${api_key}` , {
             method: 'POST',
             headers: {
                 'accept': 'application/json',
