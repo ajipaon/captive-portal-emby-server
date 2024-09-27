@@ -30,7 +30,7 @@ export async function POST(req: NextRequest) {
     });
 
     const result : any = await response.json();
-    console.log(result)
+
     if(result.Id) {
          await fetch(`${next_api_emby}/emby/Users/${result.Id}/Password?api_key=${api_key}` , {
             method: 'POST',
