@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
 
         const api_key = process.env.NEXT_TOKEN_EMBY as string || '08e470d0535045818292772381e2e029';
         const user_template = process.env.NEXT_USER_TEMPLATE_FREE_EMBY as string;
-        console.log(user_template)
+        console.log(user_template);
 
     const response = await fetch(`http://localhost:8096/emby/Users/New?api_key=${api_key}`, {
         method: 'POST',
@@ -23,8 +23,8 @@ export async function POST(req: NextRequest) {
             Name: username,
             CopyFromUserId: user_template,
             UserCopyOptions: [
-              "UserPolicy",
-              "UserConfiguration"
+              'UserPolicy',
+              'UserConfiguration'
             ]
         }),
     });
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ error: 'Failed to register user' }, { status: response.status });
     }
         return NextResponse.json({ message: 'User registered successfully' }, { status: 200 });
-    } catch (error) {
+    } catch {
         // Tangani kesalahan parsing JSON atau lainnya
         return NextResponse.json({ error: 'Invalid request' }, { status: 400 });
     }

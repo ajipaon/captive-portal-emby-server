@@ -23,11 +23,11 @@ const RegisterPage: React.FC = () => {
     const deepLink = 'emby://192.168.0.160:8096';
 
     
-    console.log(userAgent)
+    console.log(userAgent);
     if (/android/i.test(userAgent)) {
 
       window.location.href = deepLink;
-      console.log("android")
+      console.log('android');
       setTimeout(() => {
         window.location.href = 'http://192.168.0.160:8096';
       }, 3000); // 3 detik
@@ -37,17 +37,17 @@ const RegisterPage: React.FC = () => {
       // }, 3000); // 3 detik
     } else if (/iPad|iPhone|iPod/.test(userAgent) && !('MSStream' in window)) {
       window.location.href = deepLink;
-      console.log("iphone")
+      console.log('iphone');
  
       // setTimeout(() => {
       //   window.location.href = 'https://apps.apple.com/us/app/emby/id992180193';
       // }, 3000); // 3 detik
     } else {
-      console.log("browser")
+      console.log('browser');
 
       router.push(process.env.NEXT_PUBLIC__API_EMBY || 'http://localhost:8096');
     }
-  }
+  };
 
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -67,7 +67,7 @@ const RegisterPage: React.FC = () => {
       .then(async (res) => {
         if (res.ok) {
           const data = await res.json();
-          success_login(data.message)
+          success_login(data.message);
           setUsername('');
           setPassword('');
         } else {
@@ -134,8 +134,8 @@ const RegisterPage: React.FC = () => {
                   .then(() => {
                     alert('Link copied to clipboard!');
                   })
-                  .catch((err: any) => {
-                    console.error('Could not copy text: ', err);
+                  .catch((err: Error) => {
+                    console.error('Could not copy text: ', err.message);
                   });
                 } else {
                   console.error('Clipboard API not supported');
