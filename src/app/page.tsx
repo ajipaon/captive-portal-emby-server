@@ -20,7 +20,7 @@ const RegisterPage: React.FC = () => {
 
     // const deepLink = 'intent://home#Intent;package=com.mb.android;scheme=emby;end';
     // const deepLink = 'intent://home#Intent;scheme=com.mb.android;package=com.mb.android;end';
-    const deepLink = 'emby://192.168.0.160:8096';
+    const deepLink = `emby://${process.env.NEXT_PUBLIC__API_EMBY}`;
 
     
     console.log(userAgent);
@@ -29,7 +29,7 @@ const RegisterPage: React.FC = () => {
       window.location.href = deepLink;
       console.log('android');
       setTimeout(() => {
-        window.location.href = 'http://192.168.0.160:8096';
+        window.location.href = process.env.NEXT_PUBLIC__API_EMBY ||'http://192.168.0.160:8096';
       }, 3000); // 3 detik
 
       // setTimeout(() => {
